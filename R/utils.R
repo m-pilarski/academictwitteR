@@ -6,7 +6,7 @@ make_query <- function(url, params, bearer_token, max_error = 4, verbose = TRUE)
       stop("Too many errors.")
     }
     pre_time <- Sys.time()
-    r <- httr::GET(url, httr::add_headers(Authorization = bearer_token), query = params)
+    r <- httr::GET(url, httr::add_headers(Authorization = bearer_token), query = params, httr::config(http_version = 2))
     time_diff <- as.numeric(Sys.time() - pre_time)
     if (time_diff < 1) { ## To prevent #231
       Sys.sleep(1)
